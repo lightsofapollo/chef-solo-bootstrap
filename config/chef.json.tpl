@@ -1,2 +1,0 @@
-{ "recipes": "test::default" }
-

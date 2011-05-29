@@ -1,0 +1,3 @@
+# MYSQL - This is so monit can verify the database easily.
+# Note that this only opens access to the port on localhost...
+-A FWR  -s 127.0.0.1 -p tcp --dport 3306  -j ACCEPT

@@ -1,0 +1,8 @@
+# SSH
+-A FWR -p tcp -m state --state NEW --dport <%= node[:main][:ssh_port] %> -j ACCEPT
+
+# HTTP / HTTPS (80 | 443)
+
+-A FWR -p tcp --dport 80 -j ACCEPT
+-A FWR -p tcp --dport 443 -j ACCEPT
+

@@ -1,0 +1,15 @@
+set daemon 30
+set logfile syslog facility log_daemon
+set mailserver <%= @node[:mailserver] %>, localhost
+set eventqueue
+    basedir /var/monit  # set the base directory where events will be stored
+    slots 100           # optionaly limit the queue size
+    
+set mail-format { from: monit@lightsofapollo.com }
+
+set alert <%= @node[:alert_email] %>                       # receive all alerts
+
+set httpd port 3737 and
+    use address localhost
+    allow localhost
+    allow admin:m0nit0rz

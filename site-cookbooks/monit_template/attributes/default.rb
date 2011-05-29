@@ -1,0 +1,1 @@
+default[:monit][:system][:alerts] = "true"

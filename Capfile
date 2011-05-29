@@ -1,5 +1,5 @@
 require 'yaml'
-REMOTE_CHEF_PATH = "/etc/chef" # Where to find upstream cookbooks
+REMOTE_CHEF_PATH = "/var/chef" # Where to find upstream cookbooks
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
