@@ -1,2 +1,5 @@
 # .gitignore
 server.yml
+dna.rb
+config/chef.json
+.DS_Store

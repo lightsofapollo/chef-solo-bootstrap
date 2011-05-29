@@ -1,0 +1,38 @@
+{
+  "alert_email": "<%= COOKBOOK_DNA[:alert_email] %>",
+  "recipes": [
+    "build-essential", 
+    "apt", 
+    "ubuntu", 
+    "apache2",
+    "rvm_passenger::apache2",
+    "memcached", 
+    "mysql::server",
+    "jenkins",
+    "bundler",
+    "monit",
+    "monit_template",
+    "main"    
+  ],
+  "rvm": {
+    "default_ruby": "ruby-1.9.2-p180",
+    "install_rubies": "false"
+  },
+  "rvm_passenger": {
+    "version": "3.0.7",
+    "rvm_ruby": "ruby-1.9.2-p180@passenger"
+  },
+  "jenkins": {
+    "http_proxy": {
+      "variant": "apache2"
+    },
+    "server": {
+      "host": "<%= COOKBOOK_DNA[:jenkins][:server][:host] %>"
+    }
+  },
+  "mysql": {
+    "server_debian_password": "<%= COOKBOOK_DNA[:mysql][:server_debian_password] %>",
+    "server_root_password": "<%= COOKBOOK_DNA[:mysql][:server_root_password] %>",
+    "server_repl_password": "<%= COOKBOOK_DNA[:mysql][:server_repl_password] %>"
+  }
+}

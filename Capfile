@@ -1,4 +1,6 @@
 require 'yaml'
+load './dna.rb'
+
 REMOTE_CHEF_PATH = "/var/chef" # Where to find upstream cookbooks
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
@@ -53,6 +55,16 @@ role :target, ENV['server']
 
 namespace :chef do
   
+  desc "Generates the config/chef.json file from the erb template" 
+  task :generate_chef_json do
+    require 'erb'
+    file = File.dirname(__FILE__) + '/config/chef.json.erb'
+    template = File.read(file)
+    File.open(File.dirname(__FILE__) + '/config/chef.json', 'w') do |file|
+       file.write(ERB.new(template).result(binding))
+    end
+  end
+  
   desc "Test your cookbooks and config files for syntax errors"
   task :check do
     Dir[ File.join(File.dirname(__FILE__), "**", "*.rb") ].each do |recipe|
@@ -71,8 +83,9 @@ namespace :chef do
   
   desc "Upload the latest copy of your cookbooks to remote server"
   task :upload do
+    generate_chef_json
     puts "* Upload your cookbooks *"
-    run_locally "rsync -rlP --delete --exclude '.*' --exclude 'server.ym*' #{File.dirname(__FILE__)}/ #{ENV['server']}:#{REMOTE_CHEF_PATH}"
+    run_locally "rsync -rlP --delete --exclude '.*' --exclude 'server.ym*' --exclude 'dna.rb' #{File.dirname(__FILE__)}/ #{ENV['server']}:#{REMOTE_CHEF_PATH}"
   end
 
   desc "Run chef solo on the server"
