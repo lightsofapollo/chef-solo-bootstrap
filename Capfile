@@ -77,7 +77,7 @@ namespace :chef do
 
   desc "Installs required gems (assumes ruby and required libraries for chef)" 
   task :install do
-    sudo_env "gem install ohai chef --no-ri --no-rdoc"
+    sudo_env "gem install bundler ohai chef --no-ri --no-rdoc"
   end
   
   
